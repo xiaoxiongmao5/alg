@@ -5,6 +5,7 @@ import(
 	slink "xj/chapter1_linklist/level1/single_linklist"
 	dlink "xj/chapter1_linklist/level1/double_linklist"
 	rslink "xj/chapter1_linklist/level1/ring_singlelink"
+	rdlink "xj/chapter1_linklist/level1/ring_doublelink"
 )
 
 func TestSinglelink(){
@@ -186,16 +187,80 @@ func TestRingSinglelink(){
 	rslink.ShowLink(catHead)
 }
 
+func TestRingDoublelink() {
+	fmt.Println("————打印空链表————")
+	catHead := &rdlink.Cat{}
+	rdlink.ShowLink(catHead)
+
+	cat1 := &rdlink.Cat{
+		Id:1,
+	}
+	cat2 := &rdlink.Cat{
+		Id:2,
+	}
+	cat3 := &rdlink.Cat{
+		Id:3,
+	}
+	cat4 := &rdlink.Cat{
+		Id:4,
+	}
+	cat5 := &rdlink.Cat{
+		Id:5,
+	}
+	fmt.Println("————链表添加 尾结点1————")
+	catHead = rdlink.AddLinkNode(catHead, cat1, 0)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表添加 不存在位置的结点2————")
+	catHead = rdlink.AddLinkNode(catHead, cat2, 5)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表添加 头结点3————")
+	catHead = rdlink.AddLinkNode(catHead, cat3, 1)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表添加 第二个结点4————")
+	catHead = rdlink.AddLinkNode(catHead, cat4, 2)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表添加 尾结点5————")
+	catHead = rdlink.AddLinkNode(catHead, cat5, 0)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表逆序打印————")
+	rdlink.ShowLink2(catHead)
+
+	fmt.Println("————链表删除 最后一个节点————")
+	catHead = rdlink.DelLinkNode(catHead, 0)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表删除 第一个节点————")
+	catHead = rdlink.DelLinkNode(catHead, 1)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表删除 不存在的节点————")
+	catHead = rdlink.DelLinkNode(catHead, 18)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表删除 第二个节点————")
+	catHead = rdlink.DelLinkNode(catHead, 2)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表删除 第二个节点————")
+	catHead = rdlink.DelLinkNode(catHead, 2)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表删除 最后一个节点————")
+	catHead = rdlink.DelLinkNode(catHead, 0)
+	rdlink.ShowLink(catHead)
+	fmt.Println("————链表删除 第一个节点————")
+	catHead = rdlink.DelLinkNode(catHead, 1)
+	rdlink.ShowLink(catHead)
+}
+
 func main() {
 	fmt.Println("hi, linklist level1")
 
-	// fmt.Println("================================>下面测试单向链表")
-	// TestSinglelink()
+	fmt.Println("================================>下面测试单向链表")
+	TestSinglelink()
 
-	// fmt.Println("================================>下面测试双向链表")
-	// TestDoublelink()
+	fmt.Println("================================>下面测试双向链表")
+	TestDoublelink()
 
-	// fmt.Println("================================>下面测试环形单向链表")
-	// TestRingSinglelink()
+	fmt.Println("================================>下面测试环形单向链表")
+	TestRingSinglelink()
+
+	fmt.Println("================================>下面测试环形双向链表")
+	TestRingDoublelink()
 	
 }
