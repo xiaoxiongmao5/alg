@@ -10,6 +10,55 @@ type Cat struct {
 	Next *Cat
 }
 
+// 找到position的当前节点返回
+func FindLinkNode(headNode *Cat, position int) (bool, *Cat){
+	tmpNode := headNode
+	len := 0
+	flag := false
+	for {
+		len++
+		tmpNode = tmpNode.Next
+		if len == position {
+			flag = true
+			break
+		}
+		if tmpNode.Next == nil {
+			break
+		}
+	}
+	if !flag && position == 0 {
+		return true, tmpNode
+	}
+	return flag, tmpNode
+}
+// 在node前插入newNode
+func AddBefore(node *Cat, newNode *Cat) {
+	if node.Pre != nil {
+		node.Pre.Next = newNode
+	}
+	newNode.Next = node
+	newNode.Pre = node.Pre
+	node.Pre = newNode
+}
+// 在node后插入newNode
+func AddAfter(node *Cat, newNode *Cat) {
+	newNode.Next = node.Next
+	if node.Next != nil {
+		node.Next.Pre = newNode
+	}
+	node.Next = newNode
+	newNode.Pre = node
+}
+// 删除node节点
+func DelNode(node *Cat) {
+	if node.Pre != nil {
+		node.Pre.Next = node.Next
+	}
+	if node.Next != nil {
+		node.Next.Pre = node.Pre
+	}
+}
+
 // position: 0 最后一位；1 第一位；没找到位置时添加到最后一位；
 func AddLinkNode(headNode *Cat, newNode *Cat, position int) {
 	// 若该链表是否为空
@@ -18,34 +67,12 @@ func AddLinkNode(headNode *Cat, newNode *Cat, position int) {
 		newNode.Pre = headNode
 		return
 	}
-	tmpNode := headNode
-	// 若添加位置为1，插入在首位（headNode后第一个）
-	if position == 1 {
-		newNode.Next = tmpNode.Next
-		tmpNode.Next.Pre = newNode
-		tmpNode.Next = newNode
-		newNode.Pre = tmpNode
-		return
+	find, tmpNode := FindLinkNode(headNode, position)
+	if find {
+		AddBefore(tmpNode, newNode)
+	} else {
+		AddAfter(tmpNode, newNode)
 	}
-
-	len := 1
-	for {
-		if tmpNode.Next == nil {
-			break
-		}
-		tmpNode = tmpNode.Next
-		len++
-		// 找到添加位置了
-		if len == position {
-			break
-		}
-	}
-	newNode.Next = tmpNode.Next
-	if tmpNode.Next != nil {
-		tmpNode.Next.Pre = newNode
-	}
-	tmpNode.Next = newNode
-	newNode.Pre = tmpNode
 }
 
 // position: 0 最后一位； 1第一位； 没找到位置时不删除
@@ -53,33 +80,10 @@ func DelLinkNode(headNode *Cat, position int){
 	if headNode.Next == nil {
 		return
 	}
-	tmpNode := headNode
-	len := 1
-	flag := false
-	for {
-		if position == len {
-			flag = true
-			break
-		}
-		if tmpNode.Next.Next == nil {
-			break
-		}
-		len ++
-		tmpNode = tmpNode.Next
-		
+	find, tmpNode := FindLinkNode(headNode, position)
+	if find {
+		DelNode(tmpNode)
 	}
-	if flag {
-		if tmpNode.Next.Next != nil {
-			tmpNode.Next.Next.Pre = tmpNode
-		}
-		tmpNode.Next = tmpNode.Next.Next
-		return
-	}
-	if position == 0 {
-		tmpNode.Next = nil
-		return
-	}
-	fmt.Println("position越界")
 }
 
 func ShowLink(headNode *Cat) {

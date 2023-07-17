@@ -9,6 +9,51 @@ type Cat struct {
 	Next *Cat
 }
 
+// 找到position的前一个节点返回
+func FindLinkNode(headNode *Cat, position int) (bool, *Cat){
+	preNode := headNode
+	lastNode := headNode
+	for {
+		lastNode = lastNode.Next
+		if lastNode.Next == headNode {
+			break
+		}
+	}
+	len := 1
+	flag := false
+	for {
+		if len == position {
+			flag = true
+			break
+		}
+		len++
+		preNode = lastNode
+		lastNode = lastNode.Next
+		if lastNode.Next == headNode {
+			break
+		}
+	}
+	if !flag && position==0 {
+		return true, preNode	
+	}
+	return flag, lastNode
+}
+
+func AddAfter(node *Cat, newNode *Cat) {
+	newNode.Next = node.Next
+	node.Next = newNode
+}
+
+func DelNode(node *Cat) {
+	if node.Next == node {
+		node.Next = nil
+		return
+	}
+	if node.Next != nil {
+		node.Next = node.Next.Next
+	}
+}
+
 // position: 0 最后一位；1 第一位（是新的headNode）；没找到位置时添加到最后一位；
 func AddLinkNode(headNode *Cat, newNode *Cat, position int) *Cat{
 	// 若该链表是否为空,自己指向自己
@@ -17,36 +62,11 @@ func AddLinkNode(headNode *Cat, newNode *Cat, position int) *Cat{
 		headNode.Next = headNode
 		return headNode
 	}
-	tmpNode := headNode
-	lastNode := headNode
-	for {
-		lastNode = lastNode.Next
-		if lastNode.Next == headNode {
-			break
-		}
-	}
-	// 若添加位置为1，插入在首位（作为新的headNode）
+	_, tmpNode := FindLinkNode(headNode, position)
+	AddAfter(tmpNode, newNode)
 	if position == 1 {
-		lastNode.Next = newNode
-		newNode.Next = tmpNode
 		return newNode
 	}
-
-	len := 1
-	for {
-		tmpNode = tmpNode.Next
-		lastNode = lastNode.Next
-		len++
-		// 找到添加位置了
-		if len == position {
-			break
-		}
-		if tmpNode == headNode {
-			break
-		}
-	}
-	newNode.Next = tmpNode
-	lastNode.Next = newNode
 	return headNode
 }
 
@@ -55,52 +75,16 @@ func DelLinkNode(headNode *Cat, position int) *Cat{
 	if headNode.Next == nil {
 		return headNode
 	}
-	tmpNode := headNode
-	lastNode := headNode
-	for {
-		lastNode = lastNode.Next
-		if lastNode.Next == headNode {
-			break
-		}
+	find, tmpNode := FindLinkNode(headNode, position)
+	if find {
+		DelNode(tmpNode)
 	}
-	// 说明当前只有一个结点
-	if lastNode == tmpNode {
-		if position == 0 || position == 1 {
-			headNode.Next = nil
-			return headNode
-		}
+	if !find && position == 0 {
+		DelNode(tmpNode)
 	}
-	// 删除第一位，headNode要向下移动一位
 	if position == 1 {
-		lastNode.Next = tmpNode.Next
-		tmpNode = tmpNode.Next
-		return tmpNode
+		return headNode.Next
 	}
-
-	len := 1
-	flag := false
-	for {
-		tmpNode = tmpNode.Next
-		lastNode = lastNode.Next
-		len++
-		if position == len {
-			flag = true
-			break
-		}
-		if tmpNode.Next == headNode {
-			break
-		}
-	}
-	if flag {
-		lastNode.Next = tmpNode.Next
-		return headNode
-	}
-	// 删除的是最后一位
-	if position == 0 {
-		lastNode.Next = tmpNode.Next
-		return headNode
-	}
-	fmt.Println("position越界")
 	return headNode
 }
 

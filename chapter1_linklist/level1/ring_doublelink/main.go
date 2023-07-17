@@ -10,8 +10,56 @@ type Cat struct {
 	Next *Cat
 }
 
+// 返回当前
+func FindLinkNode(headNode *Cat, position int) (bool, *Cat) {
+	tmpNode := headNode
+	len := 1
+	find := false
+	for {
+		// 找到添加位置了
+		if len == position {
+			find = true
+			break
+		}
+		if tmpNode.Next == headNode {
+			break
+		}
+		len++
+		tmpNode = tmpNode.Next
+	}
+	if position == 0 && headNode.Next != nil {
+		find = true
+	}
+	return find, tmpNode
+}
+
+func AddBefore(node *Cat, newNode *Cat){
+	node.Pre.Next = newNode
+	newNode.Pre = node.Pre
+	newNode.Next = node
+	node.Pre = newNode
+}
+
+func AddAfter(node *Cat, newNode *Cat){
+	newNode.Pre = node
+	newNode.Next = node.Next
+	node.Next.Pre = newNode
+	node.Next = newNode
+}
+
+func RemoveCur(node *Cat) {
+	if node == node.Next {
+		node.Next = nil
+		node.Pre = nil
+	}else{
+		node.Pre.Next = node.Next
+		node.Next.Pre = node.Pre
+	}
+}
+
 // position: 0 最后一位；1 第一位（是新的headNode）；没找到位置时添加到最后一位；
 func AddLinkNode(headNode *Cat, newNode *Cat, position int) *Cat{
+
 	// 若该链表是否为空,自己指向自己
 	if headNode.Next == nil {
 		headNode.Id = newNode.Id
@@ -19,41 +67,17 @@ func AddLinkNode(headNode *Cat, newNode *Cat, position int) *Cat{
 		headNode.Pre = headNode
 		return headNode
 	}
-	tmpNode := headNode
-	lastNode := headNode
-	for {
-		lastNode = lastNode.Next
-		if lastNode.Next == headNode {
-			break
-		}
+	_, node := FindLinkNode(headNode, position)
+	if position == 0 {
+		AddAfter(node, newNode)
+	} else {
+		AddBefore(node, newNode)
 	}
-	// 若添加位置为1，插入在首位（作为新的headNode）
+	var ret = headNode
 	if position == 1 {
-		lastNode.Next = newNode
-		newNode.Next = tmpNode
-		newNode.Pre = lastNode
-		tmpNode.Pre = newNode
-		return newNode
+		ret = headNode.Pre
 	}
-
-	len := 1
-	for {
-		tmpNode = tmpNode.Next
-		lastNode = lastNode.Next
-		len++
-		// 找到添加位置了
-		if len == position {
-			break
-		}
-		if tmpNode == headNode {
-			break
-		}
-	}
-	newNode.Next = tmpNode
-	lastNode.Next = newNode
-	newNode.Pre = lastNode
-	tmpNode.Pre = newNode
-	return headNode
+	return ret
 }
 
 // position: 0 最后一位； 1第一位（headNode向下移动一位）； 没找到位置时不删除
@@ -61,52 +85,16 @@ func DelLinkNode(headNode *Cat, position int) *Cat{
 	if headNode.Next == nil {
 		return headNode
 	}
-	tmpNode := headNode
-	lastNode := headNode
-	for {
-		lastNode = lastNode.Next
-		if lastNode.Next == headNode {
-			break
-		}
-	}
-	// 说明当前只有一个结点
-	if lastNode == tmpNode {
-		if position == 0 || position == 1 {
-			headNode.Next = nil
-			headNode.Pre = nil
-			return headNode
-		}
-	}
-	// 删除第一位，headNode要向下移动一位
-	if position == 1 {
-		lastNode.Next = tmpNode.Next
-		tmpNode.Next.Pre = lastNode
-		tmpNode = tmpNode.Next
-		return tmpNode
-	}
-
-	len := 1
-	flag := false
-	for {
-		tmpNode = tmpNode.Next
-		lastNode = lastNode.Next
-		len++
-		if position == len {
-			flag = true
-			break
-		}
-		if tmpNode.Next == headNode {
-			break
-		}
-	}
-	// 找到位置 或者 删除的是最后一位
-	if flag || position == 0{
-		lastNode.Next = tmpNode.Next
-		tmpNode.Next.Pre = lastNode
+	find, node := FindLinkNode(headNode, position)
+	if !find {
 		return headNode
 	}
-	fmt.Println("position越界")
-	return headNode
+	RemoveCur(node)
+	var ret = headNode
+	if position == 1 && headNode.Next != nil{
+		ret = headNode.Next
+	}
+	return ret
 }
 
 func ShowLink(headNode *Cat) {
