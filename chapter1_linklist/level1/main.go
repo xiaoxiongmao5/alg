@@ -9,22 +9,22 @@ import(
 
 func TestSinglelink(){
 	fmt.Println("————打印空链表————")
-	catHead := &slink.SingleCat{}
+	catHead := &slink.Cat{}
 	slink.ShowLink(catHead)
 
-	cat1 := &slink.SingleCat{
+	cat1 := &slink.Cat{
 		Id:1,
 	}
-	cat2 := &slink.SingleCat{
+	cat2 := &slink.Cat{
 		Id:2,
 	}
-	cat3 := &slink.SingleCat{
+	cat3 := &slink.Cat{
 		Id:3,
 	}
-	cat4 := &slink.SingleCat{
+	cat4 := &slink.Cat{
 		Id:4,
 	}
-	cat5 := &slink.SingleCat{
+	cat5 := &slink.Cat{
 		Id:5,
 	}
 	fmt.Println("————链表添加 尾结点1————")
@@ -68,22 +68,22 @@ func TestSinglelink(){
 
 func TestDoublelink(){
 	fmt.Println("————打印空链表————")
-	catHead := &dlink.SingleCat{}
+	catHead := &dlink.Cat{}
 	dlink.ShowLink(catHead)
 
-	cat1 := &dlink.SingleCat{
+	cat1 := &dlink.Cat{
 		Id:1,
 	}
-	cat2 := &dlink.SingleCat{
+	cat2 := &dlink.Cat{
 		Id:2,
 	}
-	cat3 := &dlink.SingleCat{
+	cat3 := &dlink.Cat{
 		Id:3,
 	}
-	cat4 := &dlink.SingleCat{
+	cat4 := &dlink.Cat{
 		Id:4,
 	}
-	cat5 := &dlink.SingleCat{
+	cat5 := &dlink.Cat{
 		Id:5,
 	}
 	fmt.Println("————链表添加 尾结点1————")
@@ -129,22 +129,22 @@ func TestDoublelink(){
 
 func TestRingSinglelink(){
 	fmt.Println("————打印空链表————")
-	catHead := &rslink.SingleCat{}
+	catHead := &rslink.Cat{}
 	rslink.ShowLink(catHead)
 
-	cat1 := &rslink.SingleCat{
+	cat1 := &rslink.Cat{
 		Id:1,
 	}
-	cat2 := &rslink.SingleCat{
+	cat2 := &rslink.Cat{
 		Id:2,
 	}
-	cat3 := &rslink.SingleCat{
+	cat3 := &rslink.Cat{
 		Id:3,
 	}
-	cat4 := &rslink.SingleCat{
+	cat4 := &rslink.Cat{
 		Id:4,
 	}
-	cat5 := &rslink.SingleCat{
+	cat5 := &rslink.Cat{
 		Id:5,
 	}
 	fmt.Println("————链表添加 尾结点1————")
@@ -189,13 +189,13 @@ func TestRingSinglelink(){
 func main() {
 	fmt.Println("hi, linklist level1")
 
-	// fmt.Println("================>下面测试单向链表")
+	// fmt.Println("================================>下面测试单向链表")
 	// TestSinglelink()
 
-	// fmt.Println("================>下面测试双向链表")
+	// fmt.Println("================================>下面测试双向链表")
 	// TestDoublelink()
 
-	fmt.Println("================>下面测试环形单向链表")
-	TestRingSinglelink()
+	// fmt.Println("================================>下面测试环形单向链表")
+	// TestRingSinglelink()
 	
 }

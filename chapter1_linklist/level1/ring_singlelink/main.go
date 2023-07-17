@@ -4,13 +4,13 @@ import (
 	"fmt"
 )
 
-type SingleCat struct {
+type Cat struct {
 	Id int
-	Next *SingleCat
+	Next *Cat
 }
 
 // position: 0 最后一位；1 第一位（是新的headNode）；没找到位置时添加到最后一位；
-func AddLinkNode(headNode *SingleCat, newNode *SingleCat, position int) *SingleCat{
+func AddLinkNode(headNode *Cat, newNode *Cat, position int) *Cat{
 	// 若该链表是否为空,自己指向自己
 	if headNode.Next == nil {
 		headNode.Id = newNode.Id
@@ -51,7 +51,7 @@ func AddLinkNode(headNode *SingleCat, newNode *SingleCat, position int) *SingleC
 }
 
 // position: 0 最后一位； 1第一位（headNode向下移动一位）； 没找到位置时不删除
-func DelLinkNode(headNode *SingleCat, position int) *SingleCat{
+func DelLinkNode(headNode *Cat, position int) *Cat{
 	if headNode.Next == nil {
 		return headNode
 	}
@@ -104,7 +104,7 @@ func DelLinkNode(headNode *SingleCat, position int) *SingleCat{
 	return headNode
 }
 
-func ShowLink(headNode *SingleCat) {
+func ShowLink(headNode *Cat) {
 	if headNode.Next == nil {
 		fmt.Println("link empty")
 		fmt.Println()
