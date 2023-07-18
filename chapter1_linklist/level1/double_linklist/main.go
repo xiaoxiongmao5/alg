@@ -2,16 +2,17 @@ package double_linklist
 
 import (
 	"fmt"
+	"strings"
 )
 
 type Cat struct {
-	Id int
-	Pre *Cat
+	Id   int
+	Pre  *Cat
 	Next *Cat
 }
 
 // 找到position的当前节点返回，没找到时返回最后一个节点
-func FindLinkNode(headNode *Cat, position int) (bool, *Cat){
+func FindLinkNode(headNode *Cat, position int) (bool, *Cat) {
 	if headNode.Next == nil {
 		return false, headNode
 	}
@@ -31,6 +32,7 @@ func FindLinkNode(headNode *Cat, position int) (bool, *Cat){
 	}
 	return find, tmpNode
 }
+
 // 在node前插入newNode
 func AddBefore(node *Cat, newNode *Cat) {
 	if node.Pre != nil {
@@ -40,6 +42,7 @@ func AddBefore(node *Cat, newNode *Cat) {
 	newNode.Pre = node.Pre
 	node.Pre = newNode
 }
+
 // 在node后插入newNode
 func AddAfter(node *Cat, newNode *Cat) {
 	newNode.Next = node.Next
@@ -49,6 +52,7 @@ func AddAfter(node *Cat, newNode *Cat) {
 	node.Next = newNode
 	newNode.Pre = node
 }
+
 // 删除node节点
 func RemoveCur(node *Cat) {
 	if node.Pre != nil {
@@ -58,6 +62,7 @@ func RemoveCur(node *Cat) {
 		node.Next.Pre = node.Pre
 	}
 }
+
 // 添加结点到最后一位
 func AddLastNode(headNode *Cat, newNode *Cat) {
 	if headNode == nil {
@@ -75,6 +80,7 @@ func AddLastNode(headNode *Cat, newNode *Cat) {
 	tmp.Next = newNode
 	newNode.Pre = tmp
 }
+
 // 删除最后一个结点
 func DelLastNode(headNode *Cat) {
 	if headNode.Next == nil {
@@ -91,6 +97,7 @@ func DelLastNode(headNode *Cat) {
 		tmp.Pre.Next = nil
 	}
 }
+
 // position: 0 最后一位；1 第一位；没找到位置时添加到最后一位；
 func AddLinkNode(headNode *Cat, newNode *Cat, position int) {
 	if position == 0 {
@@ -98,14 +105,15 @@ func AddLinkNode(headNode *Cat, newNode *Cat, position int) {
 		return
 	}
 	find, tmpNode := FindLinkNode(headNode, position)
-	if find  {
+	if find {
 		AddBefore(tmpNode, newNode)
 	} else {
 		AddAfter(tmpNode, newNode)
 	}
 }
+
 // position: 0 最后一位； 1第一位； 没找到位置时不删除
-func DelLinkNode(headNode *Cat, position int){
+func DelLinkNode(headNode *Cat, position int) {
 	if position == 0 {
 		DelLastNode(headNode)
 		return
@@ -114,6 +122,37 @@ func DelLinkNode(headNode *Cat, position int){
 	if find {
 		RemoveCur(tmpNode)
 	}
+}
+func BuildList(values ...int) *Cat {
+	head := &Cat{}
+	tail := head
+
+	for _, v := range values {
+		node := &Cat{Id: v}
+		tail.Next = node
+		node.Pre = tail
+		tail = node
+	}
+
+	return head
+}
+
+func DumpList(headNode *Cat) string {
+	if headNode.Next == nil {
+		return "empty"
+	}
+	var ret = make([]string, 0)
+	temp := headNode
+	var idx = 0
+	for {
+		ret = append(ret, fmt.Sprintf("%v[%v]", idx, temp.Id))
+		temp = temp.Next
+		if temp == nil {
+			break
+		}
+		idx++
+	}
+	return strings.Join(ret, "=>")
 }
 
 func ShowLink(headNode *Cat) {
