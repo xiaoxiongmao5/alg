@@ -10,7 +10,7 @@ type Cat struct {
 	Next *Cat
 }
 
-// 找到position的当前节点返回
+// 找到position的当前节点返回，没找到时返回最后一个节点
 func FindLinkNode(headNode *Cat, position int) (bool, *Cat){
 	if headNode.Next == nil {
 		return false, headNode
