@@ -20,6 +20,9 @@ type Cat struct {
 
 // 找到position前一个节点，没找到时返回最后一个节点
 func FindLinkNode(headNode *Cat, position int) (bool, *Cat){
+	if headNode.Next == nil {
+		return false, headNode
+	}
 	tmpNode := headNode
 	len := 0
 	find := false

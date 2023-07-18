@@ -353,10 +353,10 @@ func main() {
 	list1 := createSList()
 	slink.ShowLink(list1)
 
-	// fmt.Println("================================>下面测试双向链表")
-	// TestDoublelink()
-	// list2 := createDList()
-	// dlink.ShowLink(list2)
+	fmt.Println("================================>下面测试双向链表")
+	TestDoublelink()
+	list2 := createDList()
+	dlink.ShowLink(list2)
 
 	// fmt.Println("================================>下面测试环形单向链表")
 	// TestRingSinglelink()
