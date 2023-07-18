@@ -46,7 +46,7 @@ func AddAfter(node *Cat, newNode *Cat) {
 	node.Next = newNode
 }
 // 删除node的下一个元素
-func DelNode(node *Cat) {
+func DelNodeAfter(node *Cat) {
 	if node.Next != nil {
 		node.Next = node.Next.Next
 	}
@@ -98,7 +98,7 @@ func DelLinkNode(headNode *Cat, position int){
 	}
 	find, tmpNode := FindLinkNode(headNode, position)
 	if find {
-		DelNode(tmpNode)
+		DelNodeAfter(tmpNode)
 	}
 }
 

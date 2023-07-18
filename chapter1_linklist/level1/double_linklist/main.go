@@ -50,7 +50,7 @@ func AddAfter(node *Cat, newNode *Cat) {
 	newNode.Pre = node
 }
 // 删除node节点
-func DelNode(node *Cat) {
+func RemoveCur(node *Cat) {
 	if node.Pre != nil {
 		node.Pre.Next = node.Next
 	}
@@ -112,7 +112,7 @@ func DelLinkNode(headNode *Cat, position int){
 	}
 	find, tmpNode := FindLinkNode(headNode, position)
 	if find {
-		DelNode(tmpNode)
+		RemoveCur(tmpNode)
 	}
 }
 

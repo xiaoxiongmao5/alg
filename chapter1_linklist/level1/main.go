@@ -348,25 +348,25 @@ func createRDList() *rdlink.Cat{
 func main() {
 	fmt.Println("hi, linklist level1")
 
-	fmt.Println("================================>下面测试单向链表")
-	TestSinglelink()
-	list1 := createSList()
-	slink.ShowLink(list1)
+	// fmt.Println("================================>下面测试单向链表")
+	// TestSinglelink()
+	// list1 := createSList()
+	// slink.ShowLink(list1)
 
-	fmt.Println("================================>下面测试双向链表")
-	TestDoublelink()
-	list2 := createDList()
-	dlink.ShowLink(list2)
+	// fmt.Println("================================>下面测试双向链表")
+	// TestDoublelink()
+	// list2 := createDList()
+	// dlink.ShowLink(list2)
 
 	// fmt.Println("================================>下面测试环形单向链表")
 	// TestRingSinglelink()
 	// list3 := createRSList()
 	// rslink.ShowLink(list3)
 
-	// fmt.Println("================================>下面测试环形双向链表")
-	// TestRingDoublelink()
-	// list4 := createRDList()
-	// rdlink.ShowLink(list4)
+	fmt.Println("================================>下面测试环形双向链表")
+	TestRingDoublelink()
+	list4 := createRDList()
+	rdlink.ShowLink(list4)
 	
 
 
