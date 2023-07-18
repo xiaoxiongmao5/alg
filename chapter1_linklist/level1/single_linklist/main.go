@@ -18,47 +18,85 @@ type Cat struct {
 	Next *Cat
 }
 
-func FindLinkNode(headNode *Cat, position int) *Cat{
+// 找到position前一个节点，没找到时返回最后一个节点
+func FindLinkNode(headNode *Cat, position int) (bool, *Cat){
 	tmpNode := headNode
-	pre := headNode
 	len := 0
+	find := false
 	for {
 		if tmpNode.Next == nil {
 			break
 		}
 		// 找到添加位置了
 		if len + 1 == position {
+			find = true
 			break
 		}
 		len++
-		pre = tmpNode
 		tmpNode = tmpNode.Next
 	}
-	if position == 0 {
-		return pre
-	}
-	return tmpNode
+	return find, tmpNode
 }
-
+// 添加元素到node之后
+func AddAfter(node *Cat, newNode *Cat) {
+	newNode.Next = node.Next
+	node.Next = newNode
+}
+// 删除node的下一个元素
+func DelNode(node *Cat) {
+	if node.Next != nil {
+		node.Next = node.Next.Next
+	}
+}
+// 添加结点到最后一位
+func AddLastNode(headNode *Cat, newNode *Cat) {
+	if headNode == nil {
+		headNode.Next = newNode
+		return
+	}
+	tmp := headNode
+	for {
+		if tmp.Next == nil {
+			break
+		}
+		tmp = tmp.Next
+	}
+	tmp.Next = newNode
+}
+// 删除最后一个结点
+func DelLastNode(headNode *Cat) {
+	if headNode.Next == nil {
+		return
+	}
+	tmp, pre := headNode, headNode
+	for {
+		if tmp.Next == nil {
+			break
+		}
+		pre = tmp
+		tmp = tmp.Next
+	}
+	pre.Next = nil
+}
 // position: 0 最后一位；1 第一位；没找到位置时添加到最后一位；
 func AddLinkNode(headNode *Cat, newNode *Cat, position int) {
-
-	tmpNode := FindLinkNode(headNode, position)
-	newNode.Next = tmpNode.Next
-	tmpNode.Next = newNode
+	if position == 0 {
+		AddLastNode(headNode, newNode)
+		return
+	}
+	_, tmpNode := FindLinkNode(headNode, position)
+	AddAfter(tmpNode, newNode)
 }
-
 // position: 0 最后一位； 1第一位； 没找到位置时不删除
 func DelLinkNode(headNode *Cat, position int){
-
-	tmpNode := FindLinkNode(headNode, position)
-	nextNode := tmpNode.Next
-	if nextNode != nil {
-		tmpNode.Next = nextNode.Next
-	}else{
-		tmpNode.Next = nil
+	if position == 0 {
+		DelLastNode(headNode)
+		return
 	}
-	
+	find, tmpNode := FindLinkNode(headNode, position)
+	if find {
+		DelNode(tmpNode)
+	}
 }
 
 func ShowLink(headNode *Cat) {
