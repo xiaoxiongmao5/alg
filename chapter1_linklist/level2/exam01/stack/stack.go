@@ -5,22 +5,23 @@ import (
 	"errors"
 )
 
+// 定义栈
 type Stack struct {
 	MaxLen int
-	Array [10]int
+	Array [10]interface{}
 	Top int	//-1 为空
 }
 
-func (this *Stack) Pop() (int, error) {
+func (this *Stack) Pop() (interface{}, error) {
 	if this.IsEmpty() {
-		return -1, errors.New("stack empty")
+		return nil, errors.New("stack empty")
 	}
 	val := this.Array[this.Top]
 	this.Top--
 	return val, nil
 }
 
-func (this *Stack) Push(val int) error {
+func (this *Stack) Push(val interface{}) error {
 	if this.IsFull() {
 		return errors.New("stack full")
 	}
@@ -50,7 +51,7 @@ func (this *Stack) ShowStack() {
 	}
 	tmpNum := this.Top
 	for {
-		fmt.Printf("%d ==> ", this.Array[tmpNum])
+		fmt.Printf("%d ==> ", this.Array[tmpNum].(int))
 		tmpNum--
 		if tmpNum == -1 {
 			break
@@ -69,7 +70,8 @@ func (this *Stack) GetStackSlice() []int {
 	tmpNum := this.Top
 	i := 0
 	for {
-		ret = append(ret, this.Array[i])
+		v := this.Array[i]
+		ret = append(ret, v.(int))
 		i++
 		if i > tmpNum {
 			break
