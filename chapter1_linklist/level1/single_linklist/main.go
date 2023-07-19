@@ -2,6 +2,7 @@ package single_linklist
 
 import (
 	"fmt"
+	"strings"
 )
 
 // type LinkNode[T any] struct {
@@ -117,4 +118,34 @@ func ShowLink(headNode *Cat) {
 		}
 	}
 	fmt.Println()
+}
+
+func BuildList(values ...int) *Cat{
+	head := &Cat{}
+	tmp := head
+
+	for _, v := range values {
+		node := &Cat{Id: v}
+		tmp.Next = node
+		tmp = node
+	}
+	return head
+}
+
+func DumpList(headNode *Cat) string{
+	if headNode.Next == nil {
+		return "empty"
+	}
+	var ret = make([]string, 0)
+	tmp := headNode.Next
+	id := 1
+	for {
+		ret = append(ret, fmt.Sprintf("%v[%v]", id, tmp.Id))
+		tmp = tmp.Next
+		id++
+		if tmp == nil {
+			break
+		}
+	}
+	return strings.Join(ret, "=>")
 }

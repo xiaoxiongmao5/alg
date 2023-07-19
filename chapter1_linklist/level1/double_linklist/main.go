@@ -142,8 +142,8 @@ func DumpList(headNode *Cat) string {
 		return "empty"
 	}
 	var ret = make([]string, 0)
-	temp := headNode
-	var idx = 0
+	temp := headNode.Next
+	var idx = 1
 	for {
 		ret = append(ret, fmt.Sprintf("%v[%v]", idx, temp.Id))
 		temp = temp.Next
