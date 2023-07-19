@@ -2,11 +2,11 @@ package method01_hashmap
 
 import (
 	slink "xj/chapter1_linklist/level2/exam01/single_linklist"
-	// "fmt"
+	"fmt"
 )
 
 // 使用hashMap
-// 返回找到的公共结点，没找到时返回nil
+// 返回找到的公共结点，没找到时返回list1
 func Method(list1 *slink.Cat, list2 *slink.Cat) (bool, *slink.Cat){
 	if list1.Next == nil || list2.Next == nil {
 		return false, list1
@@ -38,9 +38,9 @@ func Method(list1 *slink.Cat, list2 *slink.Cat) (bool, *slink.Cat){
 		list2_tmp = list2_tmp.Next
 	}
 	if find {
-		// fmt.Printf("找到的公共点的Id为 %d \n", list2_tmp.Id)
+		fmt.Printf("找到的公共点的Id为 %d \n", list2_tmp.Id)
 		return find, list2_tmp	// 返回公共节点
 	}
-	// fmt.Println("这两个链表没有公共的点")
-	return find, nil
+	fmt.Println("这两个链表没有公共的点")
+	return find, list1
 }

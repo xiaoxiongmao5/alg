@@ -1,4 +1,4 @@
-package method01_hashmap
+package method03_join
 
 import (
 	"testing"
