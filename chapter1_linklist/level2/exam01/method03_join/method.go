@@ -38,7 +38,6 @@ func Method(list1 *slink.Cat, list2 *slink.Cat) (bool, *slink.Cat){
 			list2_joined = true
 			list2_tmp = list1.Next
 		}
-		
 	}
 	if find {
 		fmt.Printf("找到的公共点的Id为 %d \n", list2_tmp.Id)
