@@ -20,7 +20,7 @@ func equal(t *testing.T, desc string, slice1 []int, slice2 []int) {
 	if result {
 		fmt.Printf("%s, 正常：%s \n", desc, helperCompare(slice1))
 	} else {
-		t.Errorf("%s, 错误\n except\t %s \n got\t %s \n", desc, helperCompare(slice2), helperCompare(slice1))
+		t.Errorf("%s, 错误\n except\t%s \n got\t%s \n", desc, helperCompare(slice2), helperCompare(slice1))
 	}
 }
 

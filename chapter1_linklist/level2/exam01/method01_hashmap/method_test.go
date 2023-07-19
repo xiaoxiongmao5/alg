@@ -49,9 +49,9 @@ func TestMethod(t *testing.T) {
 	
 	find, commonNode = Method(list3, list4)
 	if !find {
-		fmt.Printf("except \t%v \n got\t%v \n", false, find)
+		fmt.Printf("except\t%v \n got\t%v \n", false, find)
 	} else {
-		t.Errorf("\n except \t%v \n got\t%v \n", false, find)
+		t.Errorf("\n except\t%v \n got\t%v \n", false, find)
 	}
 
 	fmt.Printf("======= %s =======\n", "测试传递空链表")
@@ -62,8 +62,8 @@ func TestMethod(t *testing.T) {
 	
 	find, commonNode = Method(list5, list6)
 	if !find {
-		fmt.Printf("except \t%v \n got\t%v \n", false, find)
+		fmt.Printf("except\t%v \n got\t%v \n", false, find)
 	} else {
-		t.Errorf("\n except \t%v \n got\t%v \n", false, find)
+		t.Errorf("\n except\t%v \n got\t%v \n", false, find)
 	}
 }
