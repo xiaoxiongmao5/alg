@@ -120,6 +120,23 @@ func ShowLink(headNode *Cat) {
 	fmt.Println()
 }
 
+// 获得链表的长度
+func GetListLen(headNode *Cat) int{
+	if headNode.Next == nil {
+		return 0
+	}
+	len := 1
+	tmp := headNode.Next
+	for {
+		if tmp.Next == nil {
+			break
+		}
+		len++
+		tmp = tmp.Next
+	}
+	return len
+}
+
 func BuildList(values ...int) *Cat{
 	head := &Cat{}
 	tmp := head
