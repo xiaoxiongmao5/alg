@@ -5,7 +5,7 @@ type ListNode struct {
      Next *ListNode
 }
 
-/** 解法思想：头插入
+/** 思路分析：头插入
     1. 找到left左边的元素，保持不动（作为反转虚拟头结点），注意这里需要新创建一个节点newNode指向head，再逐步移动到left前（因为可能left是1，则虚拟头结点就是直接指向head的）
     2. 从left向后依次取下一个节点，插入到虚拟头结点后面，每次操作都相当于left结点向后走，直到占到right元素的位置
     3. 因为left元素每次去掉后面的元素，都是连接它.next.next，所以反转完之后，自然left是指向原来right元素的下一个的，所以该链表现在已经正确了
@@ -37,7 +37,7 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 }
 
 
-/** 解法思想：穿针引线
+/** 思路分析：穿针引线
     1. 将该链表分成3段，left前，反转区间，right后，反转完中间之后，穿针引线起来
     2. 所以需要变量结点存储（为了之后穿针引线）：left前的位置、right后的位置
     3. 在反转区间，进行一次链表反转即可（这里有三种方式：虚拟头插法、自我反转、递归反转）
