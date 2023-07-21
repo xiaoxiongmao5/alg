@@ -18,7 +18,6 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
         return head
     }
     newlist := &ListNode{}
-    // 虚拟头结点
     newlist.Next = head
     pre := newlist
     tmp := head
