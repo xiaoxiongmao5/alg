@@ -29,11 +29,11 @@ func (this *Stack1[T]) Push(val T) error {
 }
 
 func (this *Stack1[T]) Pop() (val T, err error) {
-	if this.IsEmpty() {
-		return val, errors.New("stack empty")
+	val, err = this.Peek()
+	if err == nil {
+		this.Top--
 	}
-	this.Top--
-	return this.Array[this.Top], nil
+	return val, err
 }
 
 func (this *Stack1[T]) Peek() (val T, err error) {
