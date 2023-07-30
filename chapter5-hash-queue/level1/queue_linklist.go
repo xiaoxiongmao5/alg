@@ -20,9 +20,16 @@ type Queue[T any] struct {
 	Count int
 }
 
+func (this *Queue[T]) IsEmpty() bool {
+	if this.Head == nil || this.Head.Next == nil {
+		return true
+	}
+	return false
+}
+
 func (this *Queue[T]) Push(val T) {
 	node := &Node[T]{Val:val}
-	if this.Head == nil || this.Head.Next == nil {
+	if this.IsEmpty() {
 		this.Head = &Node[T]{
 			Next:node,
 		}
@@ -39,7 +46,7 @@ func (this *Queue[T]) Push(val T) {
 }
 
 func (this *Queue[T]) Pop() (val T, err error) {
-	if this.Head == nil || this.Head.Next == nil {
+	if this.IsEmpty() {
 		return val, errors.New("queue empty")
 	}
 	tmp := this.Head.Next
@@ -49,7 +56,7 @@ func (this *Queue[T]) Pop() (val T, err error) {
 }
 
 func (this *Queue[T]) Show() string {
-	if this.Head == nil || this.Head.Next == nil {
+	if this.IsEmpty() {
 		return ""
 	}
 	tmp := this.Head.Next
