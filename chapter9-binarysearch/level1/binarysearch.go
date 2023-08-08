@@ -128,3 +128,27 @@ func SearchByForRightInRepeatArr(nums []int, target int) int {
 	}
 	return ret
 }
+
+// 二分查找-循环方式实现-数组中有重复的元素，找到最左边的，找到后再二分查找
+func Search2ByForLeftInRepeatArr(nums []int, target int) int {
+	ret := -1
+	length := len(nums)
+	if length == 0 {
+		return ret
+	}
+	left, right := 0, length-1
+	for left <= right {
+		mid := left + ((right - left) >> 1)
+		if nums[mid] == target {
+			right = mid - 1
+		} else if nums[mid] < target {
+			left = mid + 1
+		} else {
+			right = mid - 1
+		}
+	}
+	if left < length && nums[left] == target {
+		return left
+	}
+	return ret
+}

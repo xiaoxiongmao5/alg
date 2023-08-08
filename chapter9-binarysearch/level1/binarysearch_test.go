@@ -38,4 +38,8 @@ func TestSearchLeftInRepeatArr(t *testing.T) {
 	equal[int](t, "测试重复数组中目标,循环,首个,存在,最右", SearchByForRightInRepeatArr(arr, 0), 2)
 	equal[int](t, "测试重复数组中目标,循环,不存在,最右", SearchByForRightInRepeatArr(arr, 2), -1)
 
+	equal[int](t, "测试重复数组中目标,循环2次,存在,最左", Search2ByForLeftInRepeatArr(arr, 9), 6)
+	equal[int](t, "测试重复数组中目标,循环2次,首个,存在,最左", Search2ByForLeftInRepeatArr(arr, 0), 0)
+	equal[int](t, "测试重复数组中目标,循环2次,不存在,最左", Search2ByForLeftInRepeatArr(arr, 2), -1)
+
 }
