@@ -3,7 +3,6 @@ package challenge
 // 递归-二分查找
 func Search(arr []int, val int) int {
 	length := len(arr)
-
 	find := -1
 	var a func([]int, int, int, int)
 	a = func(arr []int, left int, right int, val int) {
